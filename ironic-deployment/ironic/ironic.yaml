@@ -19,7 +19,7 @@ spec:
       hostNetwork: true
       containers:
         - name: ironic-dnsmasq
-          image: quay.io/metal3-io/ironic
+          image: platform9/ironic-image
           imagePullPolicy: Always
           securityContext:
              capabilities:
@@ -33,7 +33,7 @@ spec:
             - configMapRef:
                 name: ironic-bmo-configmap
         - name: mariadb
-          image: quay.io/metal3-io/ironic
+          image: platform9/ironic-image
           imagePullPolicy: Always
           command:
             - /bin/runmariadb
@@ -52,7 +52,7 @@ spec:
                   name: ironic-bmo-configmap
                   key: RESTART_CONTAINER_CERTIFICATE_UPDATED
         - name: ironic-api
-          image: quay.io/metal3-io/ironic
+          image: platform9/ironic-image
           imagePullPolicy: Always
           command:
             - /bin/runironic-api
@@ -69,7 +69,7 @@ spec:
                   name: mariadb-password
                   key: password
         - name: ironic-conductor
-          image: quay.io/metal3-io/ironic
+          image: platform9/ironic-image
           imagePullPolicy: Always
           command:
             - /bin/runironic-conductor
@@ -86,7 +86,7 @@ spec:
                   name: mariadb-password
                   key: password
         - name: ironic-log-watch
-          image: quay.io/metal3-io/ironic
+          image: platform9/ironic-image
           imagePullPolicy: Always
           command:
             - /bin/runlogwatch.sh
@@ -94,7 +94,7 @@ spec:
             - mountPath: /shared
               name: ironic-data-volume
         - name: ironic-inspector
-          image: quay.io/metal3-io/ironic
+          image: platform9/ironic-image
           imagePullPolicy: Always
           command:
             - /bin/runironic-inspector
