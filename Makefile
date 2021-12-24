@@ -50,9 +50,9 @@ help:  ## Display this help
 	@echo "  DEBUG            -- debug flag, if any ($(DEBUG))"
 
 # Image URL to use all building/pushing image targets
-IMG_NAME ?= baremetal-operator
-IMG_TAG ?= latest
-IMG ?= $(IMG_NAME):$(IMG_TAG)
+IMG_NAME ?= platform9/baremetal-operator
+IMG_TAG ?= v1.1.1
+IMG = $(IMG_NAME):$(IMG_TAG)
 
 ## --------------------------------------
 ## Test Targets
@@ -193,8 +193,12 @@ docker: generate manifests ## Build the docker image
 
 # Push the docker image
 .PHONY: docker-push
-docker-push:
+docker-push: docker
 	docker push ${IMG}
+
+.PHONY: release
+release: docker-push
+	docker rmi -f `docker images ${IMG} -q`
 
 ## --------------------------------------
 ## CI Targets
