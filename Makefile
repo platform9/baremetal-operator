@@ -50,8 +50,9 @@ help:  ## Display this help
 	@echo "  DEBUG            -- debug flag, if any ($(DEBUG))"
 
 # Image URL to use all building/pushing image targets
-IMG_TAG = latest
-IMG_REPO = platform9/baremetal-operator
+METAL3_VERSION ?= 0.5.1
+IMG_TAG = v$(METAL3_VERSION)
+IMG_REPO ?= platform9/baremetal-operator
 
 ## --------------------------------------
 ## Test Targets
