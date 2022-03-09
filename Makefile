@@ -50,7 +50,8 @@ help:  ## Display this help
 	@echo "  DEBUG            -- debug flag, if any ($(DEBUG))"
 
 # Image URL to use all building/pushing image targets
-IMG_TAG = latest
+PF9_VERSION ?= 5.5.0
+IMG_TAG = $PF9_VERSION
 IMG_REPO = platform9/baremetal-operator
 
 ## --------------------------------------
