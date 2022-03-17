@@ -50,9 +50,11 @@ help:  ## Display this help
 	@echo "  DEBUG            -- debug flag, if any ($(DEBUG))"
 
 # Image URL to use all building/pushing image targets
-PF9_VERSION ?= 5.5.0
-IMG_TAG = $PF9_VERSION
-IMG_REPO = platform9/baremetal-operator
+BUILD_NUMBER ?= 0
+METAL3_VERSION ?= 0.5.1
+IMG_TAG = v$(METAL3_VERSION)-$(BUILD_NUMBER)
+IMG_REGISTRY = artifactory.platform9.horse/docker-local
+IMG_REPO = baremetal-operator
 
 ## --------------------------------------
 ## Test Targets
@@ -161,16 +163,16 @@ generate: $(CONTROLLER_GEN) ## Generate code
 
 .PHONY: docker
 docker: generate manifests ## Build the docker image
-	docker build . -t ${IMG_REPO}:${IMG_TAG}
+	docker build . -t ${IMG_REGISTRY}/${IMG_REPO}:${IMG_TAG}
 
 # Push the docker image
 .PHONY: docker-push
 docker-push: docker
-	docker push ${IMG_REPO}:${IMG_TAG}
+	docker push ${IMG_REGISTRY}/${IMG_REPO}:${IMG_TAG}
 
 .PHONY: release
 release: docker-push
-	docker rmi -f `docker images ${IMG_REPO}:${IMG_TAG} -q`
+	docker rmi -f `docker images ${IMG_REGISTRY}/${IMG_REPO}:${IMG_TAG} -q`
 
 ## --------------------------------------
 ## CI Targets
