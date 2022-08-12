@@ -1,5 +1,5 @@
 BUILD_NUMBER ?= 0
-METAL3_VERSION ?= 0.5.1
+METAL3_VERSION ?= 1.1.1
 IMG_TAG = v$(METAL3_VERSION)-$(BUILD_NUMBER)
 IMG_REGISTRY ?= artifactory.platform9.horse/docker-local
 IMG_REPO = bmh-bulk-add
