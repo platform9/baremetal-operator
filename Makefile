@@ -50,8 +50,11 @@ help:  ## Display this help
 	@echo "  DEBUG            -- debug flag, if any ($(DEBUG))"
 
 # Image URL to use all building/pushing image targets
+BUILD_NUMBER ?= 0
+METAL3_VERSION ?= 1.1.1
 IMG_NAME ?= platform9/baremetal-operator
-IMG_TAG ?= v1.1.1
+IMG_TAG = v$(METAL3_VERSION)-$(BUILD_NUMBER)
+
 IMG = $(IMG_NAME):$(IMG_TAG)
 
 ## --------------------------------------
